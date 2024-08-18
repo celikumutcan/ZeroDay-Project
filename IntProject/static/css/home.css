@@ -1,0 +1,24 @@
+/* Sets the background color for the entire page */
+body {
+    background-color: #f4f4f4;
+}
+
+/* Adds padding around the container */
+.info-container {
+    padding: 20px;
+}
+
+/* Styles the info box with background color, border radius, padding, shadow, and max width */
+.info-box {
+    background-color: #ffffff;
+    border-radius: 28px;
+    padding: 20px;
+    box-shadow: 0 14px 18px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+}
+
+/* Styles the h2 element inside the info box with color and margin */
+.info-box h2 {
+    color: #b30101;
+    margin-bottom: 15px;
+}

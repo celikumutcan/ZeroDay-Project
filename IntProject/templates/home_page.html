@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block subtitle %}Home{% endblock subtitle %}
+
+/* Defines the content block for the home page */
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+
+<div class="info-container">
+    <div class="info-box">
+        <h2>Welcome to Danfoss Family</h2>
+        <p>
+            In this web page, you will find the necessary steps to follow before starting your job. 
+            Please refer to the <strong>Requirement Documents</strong> section in the navbar above 
+            to see the list of documents you need to bring on your first day at work.
+        </p>
+        <p>
+            You must watch all the videos in the <strong>Videos</strong> section. These videos are 
+            related to workplace safety. You will be tested on this material on your first day at work.
+        </p>
+        <p>
+            We wish you the best of luck in your career. Welcome aboard!
+        </p>
+    </div>
+</div>
+{% endblock content %}

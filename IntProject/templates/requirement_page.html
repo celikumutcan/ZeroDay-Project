@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block subtitle %}Required Documents{% endblock subtitle %}
+
+/* Defines the content block for the required documents page */
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/requirement.css') }}">
+<div class="container mt-5">
+    <div class="content-wrapper">
+        <h2 class="title">Required Documents for Employment</h2>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Document Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td>Copy of ID card or national identification document</td></tr>
+                    <tr><td>2</td><td>Proof of residence (residence certificate)</td></tr>
+                    <tr><td>3</td><td>Copy of the diploma of the prospective employee</td></tr>
+                    <tr><td>4</td><td>Criminal record certificate issued within the last six months</td></tr>
+                    <tr><td>8</td><td>Blood type card</td></tr>
+                    <tr><td>9</td><td>Military service status certificate (for male employees)</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,51 @@
+/* Sets the background color and font for the entire page */
+body {
+    background-color: #106868;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Styles the container with background color, border radius, shadow, padding, and top margin */
+.container {
+    background-color: rgb(197, 195, 195);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    margin-top: 50px;
+}
+
+/* Styles the title with color, uppercase text, bottom margin, center alignment, bold font, and size */
+.title {
+    color: #333;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+/* Styles the table with border, border radius, overflow, and shadow */
+.table {
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid #df0707;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Adds padding and bottom border to table cells, aligns text to the left */
+.table th,
+.table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Styles the table headers with background color, text color, uppercase text, letter spacing, and bold font */
+.table th {
+    background-color: #ad0000;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+}

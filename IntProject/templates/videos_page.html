@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block subtitle %}Videos{% endblock subtitle %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/videos.css') }}">
+
+<div class="table-container">
+    <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Link</th>
+            <th scope="col">Likes</th>
+            <th scope="col">Dislikes</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for video in videos %}
+            <tr>
+                <td>{{ video['name'] }}</td>
+                <td><a href="{{ video['url'] }}" target="_blank">Watch Video</a></td>
+                <td>{{ video['likes'] }}</td>
+                <td>{{ video['dislikes'] }}</td>
+                <td>
+                    <form method="post" style="display:inline;">
+                        <input type="hidden" name="video_id" value="{{ video['id'] }}">
+                        <button type="submit" name="action" value="like" class="btn btn-primary">Like</button>
+                    </form>
+                    <form method="post" style="display:inline;">
+                        <input type="hidden" name="video_id" value="{{ video['id'] }}">
+                        <button type="submit" name="action" value="dislike" class="btn btn-dark">Dislike</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock content %}
