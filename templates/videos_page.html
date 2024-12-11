@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block subtitle %}Videos{% endblock subtitle %}
+
+{% block content %}
+    <!-- Link to the CSS file for styling the videos page -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/videos_page.css') }}">
+    <div class="table-container">
+        {% if session.get('is_admin') %}
+            <div class="add-video-section mb-4">
+                <!-- Title for the section to add a new video -->
+                <h3>Add New Video</h3>
+                <form method="post" action="{{ url_for('video.add_video') }}">
+                    <div class="mb-3">
+                        <!-- Label for the video name input -->
+                        <label for="video_name" class="form-label">Video Name</label>
+                        <!-- Input field for the video name -->
+                        <input type="text" class="form-control" id="video_name" name="video_name" required>
+                    </div>
+                    <div class="mb-3">
+                        <!-- Label for the video URL input -->
+                        <label for="video_url" class="form-label">Video URL</label>
+                        <!-- Input field for the video URL -->
+                        <input type="url" class="form-control" id="video_url" name="video_url" required>
+                    </div>
+                    <!-- Button to submit the new video -->
+                    <button type="submit" class="btn btn-primary">Add Video</button>
+                </form>
+            </div>
+        {% endif %}
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <!-- Column names -->
+                    <th scope="col">Name</th>
+                    <th scope="col">Link</th>
+                    <th scope="col">Likes</th>
+                    <th scope="col">Dislikes</th>
+                    {% if session.get('is_admin') %}
+                        <!-- Column for admin actions like delete -->
+                        <th scope="col">Actions</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for video in videos %}
+                    <tr>
+                        <!-- Display the video name -->
+                        <td>{{ video['name'] }}</td>
+                        <!-- Link to watch the video -->
+                        <td><a href="{{ video['url'] }}" target="_blank">Watch Video</a></td>
+                        <td>
+                            <!-- Display the number of likes -->
+                            {{ video['likes'] }}
+                            <!-- Form to like the video -->
+                            <form method="post" style="display:inline;">
+                                <!-- Hidden field to store the video ID -->
+                                <input type="hidden" name="video_id" value="{{ video['id'] }}">
+                                <!-- Button to like the video -->
+                                <button type="submit" name="action" value="like" class="btn btn-primary btn-sm">Like</button>
+                            </form>
+                        </td>
+                        <td>
+                            <!-- Display the number of dislikes -->
+                            {{ video['dislikes'] }}
+                            <!-- Form to dislike the video -->
+                            <form method="post" style="display:inline;">
+                                <!-- Hidden field to store the video ID -->
+                                <input type="hidden" name="video_id" value="{{ video['id'] }}">
+                                <!-- Button to dislike the video -->
+                                <button type="submit" name="action" value="dislike" class="btn btn-dark btn-sm">Dislike</button>
+                            </form>
+                        </td>
+                        {% if session.get('is_admin') %}
+                            <td>
+                                <!-- Form to delete the video -->
+                                <form method="post" style="display:inline;">
+                                    <!-- Hidden field to store the video ID -->
+                                    <input type="hidden" name="video_id" value="{{ video['id'] }}">
+                                    <!-- Button to delete the video -->
+                                    <button type="submit" name="action" value="delete" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                            </td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock content %}

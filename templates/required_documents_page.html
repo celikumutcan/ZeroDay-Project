@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block subtitle %}Required Documents{% endblock subtitle %}
+
+{% block content %}
+    <!-- Link to the CSS file for styling the required documents page -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/required_documents_page.css') }}">
+    <div class="container mt-5">
+        <div class="content-wrapper">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <!-- Column for index number -->
+                            <th>#</th>
+                            <!-- Column for the name of the document -->
+                            <th>Document Name</th>
+                            {% if session.get('is_admin') %}
+                                <!-- Column for admin actions like delete -->
+                                <th>Actions</th>
+                            {% endif %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for doc in requirements %}
+                        <tr>
+                            <!-- Display the index of the document -->
+                            <td>{{ loop.index }}</td>
+                            <!-- Display the name of the document -->
+                            <td>{{ doc[1] }}</td>
+                            {% if session.get('is_admin') %}
+                                <td>
+                                    <!-- Form to delete a document -->
+                                    <form action="{{ url_for('requirement.delete_requirement', requirement_id=doc[0]) }}" method="POST" style="display:inline;">
+                                        <!-- Button to delete the document -->
+                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                    </form>
+                                </td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            {% if session.get('is_admin') %}
+                <div class="add-requirement-section mt-4">
+                    <!-- Title for the section to add a new requirement -->
+                    <h3 class="add-requirement-title">Add New Requirement</h3>
+                    <form action="{{ url_for('requirement.add_requirement') }}" method="POST">
+                        <div class="mb-3">
+                            <!-- Label for the input field -->
+                            <label for="requirement_name" class="form-label">Requirement Name</label>
+                            <!-- Input field for new requirement name -->
+                            <input type="text" class="form-control" id="requirement_name" name="requirement_name" required>
+                        </div>
+                        <!-- Button to submit the new requirement -->
+                        <button type="submit" class="btn btn-primary">Add Requirement</button>
+                    </form>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock content %}

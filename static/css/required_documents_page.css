@@ -1,0 +1,5 @@
+/* Sets the background color and font for the entire page */
+body {
+    background-color: rgb(81, 115, 213);
+    font-family: 'Arial', sans-serif;
+}

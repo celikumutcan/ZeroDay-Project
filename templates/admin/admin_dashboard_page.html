@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block subtitle %}Admin Dashboard{% endblock subtitle %}
+
+{% block content %}
+    <!-- Link to the admin dashboard stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin_dashboard_page.css') }}">
+
+    <div class="container mt-5">
+        <div class="content-wrapper">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <!-- Index column -->
+                        <th>#</th>
+                        <!-- Column for the username -->
+                        <th>Username</th>
+                        <!-- Column for the password -->
+                        <th>Password</th>
+                        <!-- Column for admin status -->
+                        <th>Admin Status</th>
+                        <!-- Column for actions -->
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <!-- Displays the current loop index -->
+                            <td>{{ loop.index }}</td>
+                            <!-- Displays the username -->
+                            <td>{{ user[1] }}</td>
+                            <!-- Displays the password -->
+                            <td>{{ user[2] }}</td> <!-- Şifre verisi burada görüntüleniyor -->
+                            <!-- Displays admin status -->
+                            <td>{{ 'Yes' if user[3] else 'No' }}</td>
+                            <td>
+                                <!-- Form to delete a user -->
+                                <form action="{{ url_for('admin.delete_user', user_id=user[0]) }}" method="POST" style="display:inline;">
+                                    <!-- Delete button -->
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="add-user-section mt-4">
+                <!-- Title for the Add User section -->
+                <h3 class="add-user-title">Add New User</h3>
+                <!-- Form to add a new user -->
+                <form action="{{ url_for('admin.add_user_route') }}" method="POST">
+                    <div class="mb-3">
+                        <!-- Label for the username input -->
+                        <label for="username" class="form-label">Username</label>
+                        <!-- Input for username -->
+                        <input type="text" class="form-control" id="username" name="username" required>
+                    </div>
+                    <div class="mb-3">
+                        <!-- Label for the password input -->
+                        <label for="password" class="form-label">Password</label>
+                        <!-- Input for password -->
+                        <input type="text" class="form-control" id="password" name="password" required>
+                    </div>
+                    <div class="mb-3">
+                        <!-- Label for admin status selection -->
+                        <label for="is_admin" class="form-label">Is Admin</label>
+                        <select class="form-select" id="is_admin" name="is_admin">
+                            <!-- Option for not an admin -->
+                            <option value="false">No</option>
+                            <!-- Option for being an admin -->
+                            <option value="true">Yes</option>
+                        </select>
+                    </div>
+                    <!-- Submit button to add the user -->
+                    <button type="submit" class="btn btn-primary">Add User</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
